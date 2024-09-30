@@ -8,13 +8,6 @@
   <body>
     <div id="root"></div>
 
-    <script>
-      const heading = document.createElement("h1");
-      heading.innerHTML = "i am heading created by js";
-      const root = document.getElementById("root");
-      root.appendChild(heading);
-    </script>
-
     <!-- react dcn  -->
     <script
       crossorigin
@@ -24,5 +17,15 @@
       crossorigin
       src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"
     ></script>
+
+    <script>
+      const heading = React.createElement(
+        "h1",
+        null,
+        "Hello World from React!"
+      );
+      const root = ReactDOM.createRoot(document.getElementById("root"));
+      root.render(heading);
+    </script>
   </body>
 </html>
