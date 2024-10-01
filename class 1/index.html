@@ -24,7 +24,8 @@
       const heading = React.createElement(
         "h1",
         { id: "i_am_id", class: "iAmClasss" },
-        "Hello World from React!"
+        <!-- "Hello World from React!" -->
+        React.createElement("p", {}, "i am paragraph")
       );
       const root = ReactDOM.createRoot(document.getElementById("root"));
       root.render(heading);
