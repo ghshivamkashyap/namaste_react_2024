@@ -8,6 +8,7 @@
   <body>
     <div id="root">
       <!-- heading will be rendred here  -->
+       <h1>yu</h1>
     </div>
 
     <!-- react dcn  -->
@@ -23,10 +24,15 @@
     <script>
       const heading = React.createElement(
         "h1",
-        { id: "i_am_id", class: "iAmClasss" },
+        { id: "i_am_id", className: "iAmClasss" },
         <!-- "Hello World from React!" -->
-        React.createElement("p", {}, "i am paragraph")
+        [
+          React.createElement("p", { key: 0 }, "i am paragraph"),
+          React.createElement("p", { key: 1 }, "i am paragraph 2"),
+        ]
       );
+
+      console.log("Heading: ", heading);
       const root = ReactDOM.createRoot(document.getElementById("root"));
       root.render(heading);
     </script>
