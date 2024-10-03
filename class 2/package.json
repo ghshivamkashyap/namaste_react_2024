@@ -1,9 +1,10 @@
 {
   "name": "class-2",
   "version": "1.0.0",
-  "main": "index.js",
   "scripts": {
-    "test": "jest"
+    "test": "jest",
+    "start":"npx parcel index.html",
+    "build":"npx parcel build index.html"
   },
   "keywords": [],
   "author": "",
