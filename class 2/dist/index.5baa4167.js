@@ -2966,13 +2966,50 @@ const jsxHeading = /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("h1", {
     children: "i am jsx heading made using jsx"
 }, void 0, false, {
     fileName: "app.js",
-    lineNumber: 11,
-    columnNumber: 20
+    lineNumber: 12,
+    columnNumber: 3
 }, undefined);
+const nestedData = /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+    children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+        children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+            children: "hello"
+        }, void 0, false, {
+            fileName: "app.js",
+            lineNumber: 18,
+            columnNumber: 7
+        }, undefined)
+    }, void 0, false, {
+        fileName: "app.js",
+        lineNumber: 17,
+        columnNumber: 5
+    }, undefined)
+}, void 0, false, {
+    fileName: "app.js",
+    lineNumber: 16,
+    columnNumber: 3
+}, undefined);
+const FunctionComponent = ()=>{
+    return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("p", {
+        children: "i am para from functional component"
+    }, void 0, false, {
+        fileName: "app.js",
+        lineNumber: 24,
+        columnNumber: 10
+    }, undefined);
+};
+_c = FunctionComponent;
+console.log("nested elements in jsx: ", nestedData);
 console.log("jsxHeading: ", jsxHeading);
 console.log("heading: ", heading);
+console.log("FunctionComponent: ", FunctionComponent);
 const root = (0, _reactDomDefault.default).createRoot(document.getElementById("root"));
-root.render(heading);
+root.render(/*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)(FunctionComponent, {}, void 0, false, {
+    fileName: "app.js",
+    lineNumber: 33,
+    columnNumber: 13
+}, undefined));
+var _c;
+$RefreshReg$(_c, "FunctionComponent");
 
   $parcel$ReactRefreshHelpers$6024.postlude(module);
 } finally {
