@@ -13,6 +13,14 @@ import { TopNavbar } from "./components/TopNavbar";
 
 function App() {
   const [data, setData] = useState([]);
+
+  const filterData = (data) => {
+    let filtredData = data?.length
+      ? data.filter((val) => val?.rating?.rate > 3)
+      : [];
+    console.log("Filterdata: ", filtredData);
+    setData(filtredData);
+  };
   useEffect(() => {
     let res = async () => {
       let data = await fetch(
@@ -26,12 +34,19 @@ function App() {
 
     res();
   }, []);
+console.log("Dom: ", <MainContainer/>);
 
   return (
     <div className="flex flex-col">
       {/* <TopNavbar /> */}
       <TopNavbar />
       <MainContainer data={data} />
+      <button
+        onClick={() => filterData(data)}
+        className=" bg-blue-600 text-white w-[250px]"
+      >
+        Filter data
+      </button>
       <Footer />
     </div>
   );
