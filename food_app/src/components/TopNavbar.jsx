@@ -1,6 +1,6 @@
 import React from "react";
 
-const TopNavbar = () => {
+export const TopNavbar = () => {
   return (
     <ul className=" flex gap-x-5 ">
       <li>contact</li>
@@ -12,4 +12,4 @@ const TopNavbar = () => {
   );
 };
 
-export default TopNavbar;
+// export default TopNavbar;

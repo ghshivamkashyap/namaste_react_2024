@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import Card from "./Card";
+import { value } from "../constants/constants";
 
 const MainContainer = (data) => {
   useEffect(() => {
@@ -8,7 +9,10 @@ const MainContainer = (data) => {
   return (
     <div className=" flex gap-x-2" style={{ backgroundColor: "pink" }}>
       {data?.data.length == 0 ? (
-        <p>Loading...</p>
+        <p>
+          Loading...
+          {value}
+        </p>
       ) : (
         <div className=" flex justify-evenly w-full">
           {data?.data.map((doc) => (

@@ -1,8 +1,15 @@
 import { useEffect, useState } from "react";
 import "./App.css";
 import Footer from "./components/Footer";
+
+// 2 types of impoprts below
+
+// export default MainContainer
 import MainContainer from "./components/MainContainer";
-import TopNavbar from "./components/TopNavbar";
+
+// export const TopNavbar =()=>{}
+import { TopNavbar } from "./components/TopNavbar";
+// import TopNavbar from "./components/TopNavbar";
 
 function App() {
   const [data, setData] = useState([]);
@@ -14,7 +21,6 @@ function App() {
 
       let jsonData = await data.json();
 
- 
       setData(jsonData);
     };
 
@@ -23,6 +29,7 @@ function App() {
 
   return (
     <div className="flex flex-col">
+      {/* <TopNavbar /> */}
       <TopNavbar />
       <MainContainer data={data} />
       <Footer />
