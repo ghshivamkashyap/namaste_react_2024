@@ -1,5 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
+import FunctionalComp from "./components/FunctionalComp";
 
 const heading = React.createElement(
   "h1",
@@ -15,11 +16,16 @@ const jsxHeading = (
 const nestedData = (
   <div>
     <div>
-      <div>hello</div>
+      <h2>I am heading</h2>
+      <FunctionalComp />
     </div>
   </div>
 );
+{
+  /* <FunctionalComp */
+}
 
+// below is a functionsl com[pontnt ]
 const FunctionComponent = () => {
   return <p>i am para from functional component</p>;
 };
@@ -30,4 +36,4 @@ console.log("heading: ", heading);
 console.log("FunctionComponent: ", FunctionComponent);
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
-root.render(<FunctionComponent />);
+root.render(nestedData);
