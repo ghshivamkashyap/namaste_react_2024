@@ -21,7 +21,11 @@ function App() {
     console.log("Filterdata: ", filtredData);
     setData(filtredData);
   };
+
+  console.log("before use effect");
   useEffect(() => {
+    console.log("inside use effect");
+
     let res = async () => {
       let data = await fetch(
         "https://fakestoreapi.com/products/category/jewelery"
@@ -34,7 +38,9 @@ function App() {
 
     res();
   }, []);
-console.log("Dom: ", <MainContainer/>);
+  console.log("after use effect");
+
+  console.log("Dom: ", <MainContainer />);
 
   return (
     <div className="flex flex-col">
