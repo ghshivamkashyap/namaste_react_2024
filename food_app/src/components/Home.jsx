@@ -1,21 +1,9 @@
+import React from "react";
 import { useEffect, useState } from "react";
-import "./App.css";
-import Footer from "./components/Footer";
-import Skeleton from "react-loading-skeleton";
-import "react-loading-skeleton/dist/skeleton.css";
-import { Route, Routes, useNavigate } from "react-router-dom";
-// 2 types of impoprts below
+import MainContainer from "./MainContainer";
+import { Link } from "react-router-dom";
 
-// export default MainContainer
-import MainContainer from "./components/MainContainer";
-
-// export const TopNavbar =()=>{}
-import { TopNavbar } from "./components/TopNavbar";
-import About from "./components/About";
-import Home from "./components/Home";
-// import TopNavbar from "./components/TopNavbar";
-
-function App() {
+const Home = () => {
   const [data, setData] = useState([]);
   const [originalData, setOriginalData] = useState([]);
 
@@ -58,22 +46,18 @@ function App() {
     res();
   }, []);
   console.log("after use effect");
-
-  console.log("Dom: ", <MainContainer />);
-
   return (
-    <div className="flex flex-col">
-      {/* <TopNavbar /> */}
-      <TopNavbar />
-
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/about" element={<About />} />
-      </Routes>
-
-      <Footer />
+    <div className=" flex flex-col">
+      <input
+        type="text"
+        onChange={(e) => {
+          searchData(e.target.value);
+        }}
+      />
+      <Link to={"/about"}>About</Link>
+      <MainContainer data={data} />
     </div>
   );
-}
+};
 
-export default App;
+export default Home;

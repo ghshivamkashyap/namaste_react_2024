@@ -12,7 +12,7 @@ const MainContainer = (data) => {
 
   return (
     <div className="flex gap-x-2">
-      <Link to={"/about"}>About</Link>
+      
       {data?.data.length === 0 ? (
         <SkeletonTheme baseColor="#2a2a2a" highlightColor="#444">
           <p>
