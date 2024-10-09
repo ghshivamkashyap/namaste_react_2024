@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import "./App.css";
 import Footer from "./components/Footer";
+import Skeleton from "react-loading-skeleton";
+import "react-loading-skeleton/dist/skeleton.css";
 
 // 2 types of impoprts below
 
@@ -13,6 +15,7 @@ import { TopNavbar } from "./components/TopNavbar";
 
 function App() {
   const [data, setData] = useState([]);
+  const [originalData, setOriginalData] = useState([]);
 
   const filterData = (data) => {
     let filtredData = data?.length
@@ -21,7 +24,21 @@ function App() {
     console.log("Filterdata: ", filtredData);
     setData(filtredData);
   };
-
+  const searchData = (e) => {
+    console.log("Val of e is: ", e);
+    setData(originalData);
+    if (e === "") {
+      return;
+    }
+    // return;
+    let filtredData = data?.length
+      ? data.filter((val) =>
+          val?.title?.toLowerCase().includes(e.toLowerCase())
+        )
+      : [];
+    console.log("searched data: ", filtredData);
+    setData(filtredData);
+  };
   console.log("before use effect");
   useEffect(() => {
     console.log("inside use effect");
@@ -32,7 +49,7 @@ function App() {
       );
 
       let jsonData = await data.json();
-
+      setOriginalData(jsonData);
       setData(jsonData);
     };
 
@@ -46,6 +63,12 @@ function App() {
     <div className="flex flex-col">
       {/* <TopNavbar /> */}
       <TopNavbar />
+      <input
+        type="text"
+        onChange={(e) => {
+          searchData(e.target.value);
+        }}
+      />
       <MainContainer data={data} />
       <button
         onClick={() => filterData(data)}
