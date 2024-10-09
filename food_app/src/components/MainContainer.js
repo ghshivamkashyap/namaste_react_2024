@@ -3,6 +3,7 @@ import Card from "./Card";
 import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
 import { value } from "../constants/constants";
+import { Link } from "react-router-dom";
 
 const MainContainer = (data) => {
   useEffect(() => {
@@ -11,6 +12,7 @@ const MainContainer = (data) => {
 
   return (
     <div className="flex gap-x-2">
+      <Link to={"/about"}>About</Link>
       {data?.data.length === 0 ? (
         <SkeletonTheme baseColor="#2a2a2a" highlightColor="#444">
           <p>

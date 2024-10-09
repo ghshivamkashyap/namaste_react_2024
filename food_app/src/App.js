@@ -3,7 +3,7 @@ import "./App.css";
 import Footer from "./components/Footer";
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
-
+import { Route, Routes, useNavigate } from "react-router-dom";
 // 2 types of impoprts below
 
 // export default MainContainer
@@ -11,6 +11,7 @@ import MainContainer from "./components/MainContainer";
 
 // export const TopNavbar =()=>{}
 import { TopNavbar } from "./components/TopNavbar";
+import About from "./components/About";
 // import TopNavbar from "./components/TopNavbar";
 
 function App() {
@@ -69,7 +70,11 @@ function App() {
           searchData(e.target.value);
         }}
       />
-      <MainContainer data={data} />
+      <Routes>
+        <Route path="/" element={<MainContainer data={data} />} />
+        <Route path="/about" element={<About />} />
+      </Routes>
+
       <button
         onClick={() => filterData(data)}
         className=" bg-blue-600 text-white w-[250px]"
