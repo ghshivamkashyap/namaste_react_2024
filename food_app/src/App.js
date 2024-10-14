@@ -13,6 +13,10 @@ import MainContainer from "./components/MainContainer";
 import { TopNavbar } from "./components/TopNavbar";
 import About from "./components/About";
 import Home from "./components/Home";
+import Error from "./components/Error";
+import Dashboard from "./components/dashboard/Dashboard";
+import Outlet1 from "./components/dashboard/Outlet1";
+import Outlet2 from "./components/dashboard/Outlet2";
 // import TopNavbar from "./components/TopNavbar";
 
 function App() {
@@ -69,6 +73,13 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/about" element={<About />} />
+        <Route path="*" element={<Error />} />
+
+        {/* nexted routing for sidebars  */}
+        <Route element={<Dashboard />}>
+          <Route path="/dashboard/ol1" element={<Outlet1 />} />
+          <Route path="/dashboard/ol2" element={<Outlet2 />} />
+        </Route>
       </Routes>
 
       <Footer />
