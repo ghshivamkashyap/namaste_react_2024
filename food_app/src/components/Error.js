@@ -13,6 +13,7 @@ const Error = () => {
           Back to home
         </button>
       </Link>
+      <a href="/">Home</a>
     </div>
   );
 };
