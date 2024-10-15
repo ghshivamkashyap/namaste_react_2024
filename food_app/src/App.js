@@ -17,6 +17,8 @@ import Error from "./components/Error";
 import Dashboard from "./components/dashboard/Dashboard";
 import Outlet1 from "./components/dashboard/Outlet1";
 import Outlet2 from "./components/dashboard/Outlet2";
+import Product from "./components/Product";
+import ClassVsFunctionslComponent from "./components/ClassVsFunctionslComponent";
 // import TopNavbar from "./components/TopNavbar";
 
 function App() {
@@ -73,13 +75,18 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/about" element={<About />} />
-        <Route path="*" element={<Error />} />
+        <Route path="/product/:id" element={<Product />} />
+        <Route
+          path="/class-vs-functionsl-component"
+          element={<ClassVsFunctionslComponent />}
+        />
 
         {/* nexted routing for sidebars  */}
         <Route element={<Dashboard />}>
           <Route path="/dashboard/ol1" element={<Outlet1 />} />
           <Route path="/dashboard/ol2" element={<Outlet2 />} />
         </Route>
+        <Route path="*" element={<Error />} />
       </Routes>
 
       <Footer />

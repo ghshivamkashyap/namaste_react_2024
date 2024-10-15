@@ -12,7 +12,6 @@ const MainContainer = (data) => {
 
   return (
     <div className="flex gap-x-2">
-      
       {data?.data.length === 0 ? (
         <SkeletonTheme baseColor="#2a2a2a" highlightColor="#444">
           <p>
@@ -22,7 +21,10 @@ const MainContainer = (data) => {
       ) : (
         <div className="flex justify-evenly w-full">
           {data?.data.map((doc) => (
-            <Card data={doc} key={doc.id} />
+            <Link key={doc.id} to={`/product/${doc.id}`}>
+              {" "}
+              <Card data={doc} key={doc.id} />
+            </Link>
           ))}
         </div>
       )}

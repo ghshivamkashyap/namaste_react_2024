@@ -56,8 +56,17 @@ const Home = () => {
       />
       <Link to={"/about"}>About</Link>
       <Link to={"/dashboard/ol1"}>Dashboard</Link>
+      <Link to={"/class-vs-functionsl-component"}>
+        Class vs functionsl component
+      </Link>
+
       <MainContainer data={data} />
-      <button className=" bg-green-700 w-[200px] rounded-md h-[50px] font-semibold text-white" onClick={() => filterData(data)}>Filter data</button>
+      <button
+        className=" bg-green-700 w-[200px] rounded-md h-[50px] font-semibold text-white"
+        onClick={() => filterData(data)}
+      >
+        Filter data
+      </button>
     </div>
   );
 };
