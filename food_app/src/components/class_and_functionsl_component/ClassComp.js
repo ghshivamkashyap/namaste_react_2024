@@ -16,7 +16,15 @@ class ClassComp extends React.Component {
           i am class component{" "}
           <span className="  bg-slate-400">{this.props?.data}</span>
         </div>
-        <p>{this.state.count+1}</p>
+        <p>{this.state.count}</p>
+        <button
+          onClick={() => {
+            this.setState({ count: this.state.count + 1 });
+          }}
+          class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+        >
+          Click me
+        </button>
       </>
     );
   }
