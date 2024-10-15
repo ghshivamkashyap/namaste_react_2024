@@ -54,11 +54,25 @@ const Home = () => {
           searchData(e.target.value);
         }}
       />
-      <Link to={"/about"}>About</Link>
-      <Link to={"/dashboard/ol1"}>Dashboard</Link>
-      <Link to={"/class-vs-functionsl-component"}>
-        Class vs functionsl component
-      </Link>
+      <div className="flex gap-x-3">
+        <Link to={"/about"}>
+          <button class="bg-gradient-to-r from-green-400 to-blue-500 hover:from-green-500 hover:to-blue-700 text-white font-bold py-2 px-4 rounded shadow-lg transition-all duration-300 transform hover:scale-105">
+            About
+          </button>
+        </Link>
+
+        <Link to={"/dashboard/ol1"}>
+          <button class="bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-700 hover:to-pink-700 text-white font-bold py-2 px-4 rounded shadow-lg transition-all duration-300 transform hover:scale-105">
+            Dashboard
+          </button>
+        </Link>
+
+        <Link to={"/class-vs-functionsl-component"}>
+          <button class="bg-gradient-to-r from-yellow-400 to-red-500 hover:from-yellow-500 hover:to-red-700 text-white font-bold py-2 px-4 rounded shadow-lg transition-all duration-300 transform hover:scale-105">
+            Class vs Functional Component
+          </button>
+        </Link>
+      </div>
 
       <MainContainer data={data} />
       <button

@@ -5,8 +5,8 @@ import FunctionComp from "./class_and_functionsl_component/FunctionComp";
 const ClassVsFunctionslComponent = () => {
   return (
     <div>
-      <ClassComp />
-      <FunctionComp />
+      <ClassComp data={"class component Propsdata"} />
+      <FunctionComp data={"functional component Propsdata"} />
     </div>
   );
 };
