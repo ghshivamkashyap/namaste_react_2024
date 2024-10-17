@@ -2,6 +2,7 @@ import React from "react";
 import { useEffect, useState } from "react";
 import MainContainer from "./MainContainer";
 import { Link } from "react-router-dom";
+import useFetchData from "../utils/customHooks/useFetchData";
 
 const Home = () => {
   const [data, setData] = useState([]);
@@ -30,21 +31,13 @@ const Home = () => {
     setData(filtredData);
   };
   console.log("before use effect");
+
+  const apiData = useFetchData();
   useEffect(() => {
-    console.log("inside use effect");
+    setOriginalData(apiData);
+    setData(apiData);
+  }, [apiData]);
 
-    let res = async () => {
-      let data = await fetch(
-        "https://fakestoreapi.com/products/category/jewelery"
-      );
-
-      let jsonData = await data.json();
-      setOriginalData(jsonData);
-      setData(jsonData);
-    };
-
-    res();
-  }, []);
   console.log("after use effect");
   return (
     <div className=" flex flex-col">

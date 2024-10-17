@@ -10,7 +10,6 @@ class ClassComp extends React.Component {
     };
   }
   render() {
-    
     return (
       <>
         <div className="  bg-blue-800 text-white w-52 h-52">
