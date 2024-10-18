@@ -15,13 +15,14 @@ import { TopNavbar } from "./components/TopNavbar";
 
 import Home from "./components/Home";
 import Error from "./components/Error";
-import Dashboard from "./components/dashboard/Dashboard";
+// import Dashboard from "./components/dashboard/Dashboard";
 import Outlet1 from "./components/dashboard/Outlet1";
 import Outlet2 from "./components/dashboard/Outlet2";
 import Product from "./components/Product";
 import ClassVsFunctionslComponent from "./components/ClassVsFunctionslComponent";
 // import TopNavbar from "./components/TopNavbar";
 const About = lazy(() => import("./components/About"));
+const Dashboard = lazy(() => import("./components/dashboard/Dashboard"));
 function App() {
   const [data, setData] = useState([]);
   const [originalData, setOriginalData] = useState([]);
@@ -90,7 +91,13 @@ function App() {
         />
 
         {/* nexted routing for sidebars  */}
-        <Route element={<Dashboard />}>
+        <Route
+          element={
+            <Suspense fallback={<div>Loading...</div>}>
+              <Dashboard />
+            </Suspense>
+          }
+        >
           <Route path="/dashboard/ol1" element={<Outlet1 />} />
           <Route path="/dashboard/ol2" element={<Outlet2 />} />
         </Route>
