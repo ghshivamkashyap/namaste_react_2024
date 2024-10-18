@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { lazy, Suspense, useEffect, useState } from "react";
 import "./App.css";
 import Footer from "./components/Footer";
 import Skeleton from "react-loading-skeleton";
@@ -11,7 +11,8 @@ import MainContainer from "./components/MainContainer";
 
 // export const TopNavbar =()=>{}
 import { TopNavbar } from "./components/TopNavbar";
-import About from "./components/About";
+// import About from "./components/About";
+
 import Home from "./components/Home";
 import Error from "./components/Error";
 import Dashboard from "./components/dashboard/Dashboard";
@@ -20,7 +21,7 @@ import Outlet2 from "./components/dashboard/Outlet2";
 import Product from "./components/Product";
 import ClassVsFunctionslComponent from "./components/ClassVsFunctionslComponent";
 // import TopNavbar from "./components/TopNavbar";
-
+const About = lazy(() => import("./components/About"));
 function App() {
   const [data, setData] = useState([]);
   const [originalData, setOriginalData] = useState([]);
@@ -74,7 +75,14 @@ function App() {
 
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/about" element={<About />} />
+        <Route
+          path="/about"
+          element={
+            <Suspense fallback={<div>Loading...</div>}>
+              <About />
+            </Suspense>
+          }
+        />
         <Route path="/product/:id" element={<Product />} />
         <Route
           path="/class-vs-functionsl-component"
