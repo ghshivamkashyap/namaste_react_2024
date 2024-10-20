@@ -20,6 +20,7 @@ import Outlet1 from "./components/dashboard/Outlet1";
 import Outlet2 from "./components/dashboard/Outlet2";
 import Product from "./components/Product";
 import ClassVsFunctionslComponent from "./components/ClassVsFunctionslComponent";
+import ControllingComponent from "./components/ControllingComponent";
 // import TopNavbar from "./components/TopNavbar";
 const About = lazy(() => import("./components/About"));
 const Dashboard = lazy(() => import("./components/dashboard/Dashboard"));
@@ -88,6 +89,10 @@ function App() {
         <Route
           path="/class-vs-functionsl-component"
           element={<ClassVsFunctionslComponent />}
+        />
+        <Route
+          path="/controlled-component"
+          element={<ControllingComponent />}
         />
 
         {/* nexted routing for sidebars  */}
