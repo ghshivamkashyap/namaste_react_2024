@@ -1,7 +1,6 @@
 import React from "react";
 
 const Card = ({ data }) => {
-  
   return (
     <div className="max-w-sm mx-auto bg-white rounded-lg shadow-md overflow-hidden">
       <img className="w-full h-48 object-cover" src={data.image} alt="Dish" />
@@ -30,6 +29,19 @@ const Card = ({ data }) => {
       </div>
     </div>
   );
+};
+
+export const labeledCard = (Card) => {
+  return (props) => {
+    console.log("props in lable: ", props);
+
+    return (
+      <div>
+        <label className="text-red-500">Sale</label>
+        <Card {...props} />
+      </div>
+    );
+  };
 };
 
 export default Card;

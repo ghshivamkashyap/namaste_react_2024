@@ -1,11 +1,12 @@
 import React, { useEffect } from "react";
-import Card from "./Card";
+import Card, { labeledCard } from "./Card";
 import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
 import { value } from "../constants/constants";
 import { Link } from "react-router-dom";
 
 const MainContainer = (data) => {
+  const LabledCard = labeledCard(Card);
   useEffect(() => {
     console.log("Props: ", data);
   }, []);
@@ -22,8 +23,11 @@ const MainContainer = (data) => {
         <div className="flex justify-evenly w-full">
           {data?.data.map((doc) => (
             <Link key={doc.id} to={`/product/${doc.id}`}>
-              {" "}
-              <Card data={doc} key={doc.id} />
+              {doc.price <= 100 ? (
+                <LabledCard data={doc} key={doc.id} />
+              ) : (
+                <Card data={doc} key={doc.id} />
+              )}
             </Link>
           ))}
         </div>
