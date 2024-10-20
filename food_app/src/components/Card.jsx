@@ -37,7 +37,7 @@ export const labeledCard = (Card) => {
 
     return (
       <div>
-        <label className="text-red-500">Sale</label>
+        <label className="text-red-500">*Sale</label>
         <Card {...props} />
       </div>
     );
