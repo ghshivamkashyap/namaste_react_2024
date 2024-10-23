@@ -1,9 +1,16 @@
-import React from "react";
+import React, { useContext } from "react";
 import useOnlineStatus from "../utils/customHooks/useOnlineStatus";
 import { Link } from "react-router-dom";
+import UserContext from "../context_api/userContext";
 
 export const TopNavbar = () => {
   const status = useOnlineStatus();
+  const userContextData = useContext(UserContext);
+
+  const updateTheme = (val) => {
+    console.log("checked: ", val);
+    userContextData.setTheme(val == true ? "dark" : "lite");
+  };
   return (
     <ul className=" flex gap-x-5 ">
       <div
@@ -15,8 +22,13 @@ export const TopNavbar = () => {
         {" "}
         <li>Home</li>
       </Link>
-
-     
+      <li>Theme: {userContextData?.theme}</li>
+      <li>
+        <input
+          type="checkbox"
+          onChange={(val) => updateTheme(val.target.checked)}
+        ></input>
+      </li>
     </ul>
   );
 };

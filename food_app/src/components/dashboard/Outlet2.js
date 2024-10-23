@@ -5,7 +5,7 @@ const Outlet2 = () => {
   const contextData = useContext(UserContext);
   console.log("Context data un t2: ", contextData);
 
-  return <div className=" bg-yellow-400">context value is: {contextData?.name}, theme is: {contextData?.theme}</div>;
+  return <div className=" bg-yellow-400"> theme is: {contextData?.theme}</div>;
 };
 
 export default Outlet2;

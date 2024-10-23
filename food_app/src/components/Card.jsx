@@ -1,8 +1,14 @@
-import React from "react";
+import React, { useContext } from "react";
+import UserContext from "../context_api/userContext";
 
 const Card = ({ data }) => {
+  const { theme } = useContext(UserContext);
   return (
-    <div className="max-w-sm mx-auto bg-white rounded-lg shadow-md overflow-hidden">
+    <div
+      className={`max-w-sm mx-auto ${
+        theme == "lite" ? "bg-white" : "bg-slate-600 text-white"
+      } rounded-lg shadow-md overflow-hidden`}
+    >
       <img className="w-full h-48 object-cover" src={data.image} alt="Dish" />
 
       <div className="p-4">

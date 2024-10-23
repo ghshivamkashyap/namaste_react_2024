@@ -68,17 +68,14 @@ function App() {
     res();
   }, []);
   console.log("after use effect");
+  const [theme, setTheme] = useState("lite");
 
   console.log("Dom: ", <MainContainer />);
 
   return (
     <div className="flex flex-col">
-      {/* <TopNavbar /> */}
-      <TopNavbar />
-
-      <UserContext.Provider
-        value={{ theme: "lite", isLoggedIn: true, name: "shivam logged in" }}
-      >
+      <UserContext.Provider value={{ theme: theme, setTheme: setTheme }}>
+        <TopNavbar />
         <Routes>
           <Route path="/" element={<Home />} />
           <Route
@@ -112,9 +109,8 @@ function App() {
           </Route>
           <Route path="*" element={<Error />} />
         </Routes>
+        <Footer />
       </UserContext.Provider>
-
-      <Footer />
     </div>
   );
 }
