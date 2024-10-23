@@ -11,15 +11,15 @@ const ControlledComponent = (props) => {
     <div className="space-y-4 flex flex-col p-6 max-w-2xl mx-auto">
       {/* Heading */}
       <div
-        className="font-bold text-3xl cursor-pointer text-gray-800 hover:text-indigo-600 transition duration-300 ease-in-out"
+        className="font-bold text-3xl bg-gray-300 cursor-pointer text-gray-800 hover:text-indigo-600 transition duration-300 ease-in-out"
         onClick={() => toggleAccordion()}
       >
-        Heading
+        Accorian no: {props.idx+1} 🔽
       </div>
 
       {/* Accordion Content */}
       <div>
-        {props?.showItem &&
+        {props?.showItem == true &&
           accordions.map((item) => (
             <div
               key={item.id}

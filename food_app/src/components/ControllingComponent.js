@@ -40,7 +40,7 @@ const ControllingComponent = () => {
     },
   ];
 
-  const [showData, setShowItem] = useState(0);
+  const [showData, setShowItem] = useState(null);
 
   return (
     <div>

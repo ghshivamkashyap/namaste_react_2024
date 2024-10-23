@@ -1,11 +1,11 @@
-import React from 'react'
+import React, { useContext } from "react";
+import UserContext from "../../context_api/userContext";
 
 const Outlet2 = () => {
-  return (
-    <div className=' bg-yellow-400'>
-      i am outlet 2
-    </div>
-  )
-}
+  const contextData = useContext(UserContext);
+  console.log("Context data un t2: ", contextData);
 
-export default Outlet2
+  return <div className=" bg-yellow-400">context value is: {contextData?.name}, theme is: {contextData?.theme}</div>;
+};
+
+export default Outlet2;
