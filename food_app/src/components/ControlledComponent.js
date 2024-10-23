@@ -1,46 +1,35 @@
-// import React from "react";
-
-// const ControlledComponent = (props) => {
-//   let data = props;
-//   console.log("Props in cc: ", data);
-
-//   return <div>s</div>;
-// };
-
-// export default ControlledComponent;
-
 import React, { useState } from "react";
 
 const ControlledComponent = (props) => {
-  // Initialize accordion open states based on the provided props
   const [accordions, setAccordions] = useState(props.data);
-  console.log("props: ", props);
 
   const toggleAccordion = (id) => {
-    // setAccordions((prevAccordions) =>
-    //   prevAccordions.map((accordion) =>
-    //     accordion.id === id
-    //       ? { ...accordion, isOpen: !accordion.isOpen }
-    //       : accordion
-    //   )
-    // );
-    props.setShowData();
+    props.setShowItem(); // Triggers showing the data in parent component
   };
 
   return (
-    <div className="space-y-4 flex flex-col">
-      <div className=" font-bold text-2xl cursor-pointer" onClick={() => toggleAccordion()}>
+    <div className="space-y-4 flex flex-col p-6 max-w-2xl mx-auto">
+      {/* Heading */}
+      <div
+        className="font-bold text-3xl cursor-pointer text-gray-800 hover:text-indigo-600 transition duration-300 ease-in-out"
+        onClick={() => toggleAccordion()}
+      >
         Heading
       </div>
+
+      {/* Accordion Content */}
       <div>
-        {" "}
         {props?.showItem &&
           accordions.map((item) => (
-            <div key={item.id} className="border-b">
+            <div
+              key={item.id}
+              className="border-b border-gray-200 last:border-none"
+            >
               {/* Accordion Title */}
-              <button className="w-full flex justify-between items-center py-4 text-left font-medium text-gray-800">
-                <span>{item.title}</span>
-                <span>{item.isOpen ? "-" : "+"}</span>
+              <button className="w-full flex justify-between items-center py-4 px-4 bg-gray-50 hover:bg-gray-100 rounded-lg transition duration-300 ease-in-out">
+                <span className="text-lg font-medium text-gray-900">
+                  {item.title}
+                </span>
               </button>
             </div>
           ))}

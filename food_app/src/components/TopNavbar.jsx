@@ -1,5 +1,6 @@
 import React from "react";
 import useOnlineStatus from "../utils/customHooks/useOnlineStatus";
+import { Link } from "react-router-dom";
 
 export const TopNavbar = () => {
   const status = useOnlineStatus();
@@ -10,12 +11,12 @@ export const TopNavbar = () => {
           status == true ? "bg-green-500" : "bg-red-500"
         } rounded-full mt-2 ml-2`}
       ></div>
+      <Link to={"/"}>
+        {" "}
+        <li>Home</li>
+      </Link>
 
-      <li>contact</li>
-      <li>orders</li>
-      <li>restorants</li>
-      <li>account</li>
-      <li>help</li>
+     
     </ul>
   );
 };

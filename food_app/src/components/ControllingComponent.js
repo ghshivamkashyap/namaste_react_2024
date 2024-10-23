@@ -40,7 +40,7 @@ const ControllingComponent = () => {
     },
   ];
 
-  const [showData, setShowData] = useState(0);
+  const [showData, setShowItem] = useState(0);
 
   return (
     <div>
@@ -49,7 +49,7 @@ const ControllingComponent = () => {
           <ControlledComponent
             data={data}
             idx={idx}
-            setShowData={() => setShowData(idx)}
+            setShowItem={() => setShowItem(idx)}
             showItem={idx == showData ? true : false}
           />
         ))}
