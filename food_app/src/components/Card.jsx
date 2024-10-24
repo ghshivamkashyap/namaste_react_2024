@@ -1,8 +1,15 @@
 import React, { useContext } from "react";
 import UserContext from "../context_api/userContext";
+import { useDispatch } from "react-redux";
+import { addItem } from "../store/slices/cartSlice";
 
 const Card = ({ data }) => {
   const { theme } = useContext(UserContext);
+
+  const dispatch = useDispatch();
+  const addToCart = (item) => {
+    dispatch(addItem(item));
+  };
   return (
     <div
       className={`max-w-sm mx-auto ${
@@ -28,8 +35,11 @@ const Card = ({ data }) => {
 
         <div className="mt-4 flex justify-between items-center">
           <span className="text-gray-600 text-sm">35 mins delivery</span>
-          <button className="bg-red-500 text-white font-bold py-2 px-4 rounded hover:bg-red-600">
-            Order Now
+          <button
+            onClick={() => addToCart(data?.title)}
+            className="bg-red-500 text-white font-bold py-2 px-4 rounded hover:bg-red-600"
+          >
+            Add to cart
           </button>
         </div>
       </div>

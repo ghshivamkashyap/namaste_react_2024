@@ -22,13 +22,15 @@ const MainContainer = (data) => {
       ) : (
         <div className="flex justify-evenly w-full">
           {data?.data.map((doc) => (
-            <Link key={doc.id} to={`/product/${doc.id}`}>
+            // <Link key={doc.id} to={`/product/${doc.id}`}>
+            <div>
               {doc.price <= 100 ? (
                 <LabledCard data={doc} key={doc.id} />
               ) : (
                 <Card data={doc} key={doc.id} />
               )}
-            </Link>
+            </div>
+            // </Link>
           ))}
         </div>
       )}
