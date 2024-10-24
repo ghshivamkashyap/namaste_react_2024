@@ -22,6 +22,8 @@ import Product from "./components/Product";
 import ClassVsFunctionslComponent from "./components/ClassVsFunctionslComponent";
 import ControllingComponent from "./components/ControllingComponent";
 import UserContext from "./context_api/userContext";
+import { Provider } from "react-redux";
+
 // import TopNavbar from "./components/TopNavbar";
 const About = lazy(() => import("./components/About"));
 const Dashboard = lazy(() => import("./components/dashboard/Dashboard"));
