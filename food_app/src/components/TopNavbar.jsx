@@ -2,8 +2,10 @@ import React, { useContext } from "react";
 import useOnlineStatus from "../utils/customHooks/useOnlineStatus";
 import { Link } from "react-router-dom";
 import UserContext from "../context_api/userContext";
+import { useSelector } from "react-redux";
 
 export const TopNavbar = () => {
+  const cart = useSelector((store) => store.cart.items);
   const status = useOnlineStatus();
   const userContextData = useContext(UserContext);
 
@@ -29,6 +31,8 @@ export const TopNavbar = () => {
           onChange={(val) => updateTheme(val.target.checked)}
         ></input>
       </li>
+
+      <li>Cart({cart.length ? cart.length : 0} items)</li>
     </ul>
   );
 };

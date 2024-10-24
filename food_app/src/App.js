@@ -23,6 +23,7 @@ import ClassVsFunctionslComponent from "./components/ClassVsFunctionslComponent"
 import ControllingComponent from "./components/ControllingComponent";
 import UserContext from "./context_api/userContext";
 import { Provider } from "react-redux";
+import appStore from "./store/appStore";
 
 // import TopNavbar from "./components/TopNavbar";
 const About = lazy(() => import("./components/About"));
@@ -76,43 +77,45 @@ function App() {
 
   return (
     <div className="flex flex-col">
-      <UserContext.Provider value={{ theme: theme, setTheme: setTheme }}>
-        <TopNavbar />
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route
-            path="/about"
-            element={
-              <Suspense fallback={<div>Loading...</div>}>
-                <About />
-              </Suspense>
-            }
-          />
-          <Route path="/product/:id" element={<Product />} />
-          <Route
-            path="/class-vs-functionsl-component"
-            element={<ClassVsFunctionslComponent />}
-          />
-          <Route
-            path="/controlled-component"
-            element={<ControllingComponent />}
-          />
+      <Provider store={appStore}>
+        <UserContext.Provider value={{ theme: theme, setTheme: setTheme }}>
+          <TopNavbar />
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route
+              path="/about"
+              element={
+                <Suspense fallback={<div>Loading...</div>}>
+                  <About />
+                </Suspense>
+              }
+            />
+            <Route path="/product/:id" element={<Product />} />
+            <Route
+              path="/class-vs-functionsl-component"
+              element={<ClassVsFunctionslComponent />}
+            />
+            <Route
+              path="/controlled-component"
+              element={<ControllingComponent />}
+            />
 
-          {/* nexted routing for sidebars  */}
-          <Route
-            element={
-              <Suspense fallback={<div>Loading...</div>}>
-                <Dashboard />
-              </Suspense>
-            }
-          >
-            <Route path="/dashboard/ol1" element={<Outlet1 />} />
-            <Route path="/dashboard/ol2" element={<Outlet2 />} />
-          </Route>
-          <Route path="*" element={<Error />} />
-        </Routes>
-        <Footer />
-      </UserContext.Provider>
+            {/* nexted routing for sidebars  */}
+            <Route
+              element={
+                <Suspense fallback={<div>Loading...</div>}>
+                  <Dashboard />
+                </Suspense>
+              }
+            >
+              <Route path="/dashboard/ol1" element={<Outlet1 />} />
+              <Route path="/dashboard/ol2" element={<Outlet2 />} />
+            </Route>
+            <Route path="*" element={<Error />} />
+          </Routes>
+          <Footer />
+        </UserContext.Provider>
+      </Provider>
     </div>
   );
 }
