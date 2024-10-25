@@ -31,8 +31,9 @@ export const TopNavbar = () => {
           onChange={(val) => updateTheme(val.target.checked)}
         ></input>
       </li>
-
-      <li>Cart({cart.length ? cart.length : 0} items)</li>
+      <Link to={"/cart"}>
+        <li>Cart({cart.length ? cart.length : 0} items)</li>
+      </Link>
     </ul>
   );
 };

@@ -24,6 +24,7 @@ import ControllingComponent from "./components/ControllingComponent";
 import UserContext from "./context_api/userContext";
 import { Provider } from "react-redux";
 import appStore from "./store/appStore";
+import Cart from "./components/Cart";
 
 // import TopNavbar from "./components/TopNavbar";
 const About = lazy(() => import("./components/About"));
@@ -99,6 +100,7 @@ function App() {
               path="/controlled-component"
               element={<ControllingComponent />}
             />
+            <Route path="/cart" element={<Cart />} />
 
             {/* nexted routing for sidebars  */}
             <Route

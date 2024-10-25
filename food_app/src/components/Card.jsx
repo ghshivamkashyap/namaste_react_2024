@@ -36,7 +36,7 @@ const Card = ({ data }) => {
         <div className="mt-4 flex justify-between items-center">
           <span className="text-gray-600 text-sm">35 mins delivery</span>
           <button
-            onClick={() => addToCart(data?.title)}
+            onClick={() => addToCart(data)}
             className="bg-red-500 text-white font-bold py-2 px-4 rounded hover:bg-red-600"
           >
             Add to cart
