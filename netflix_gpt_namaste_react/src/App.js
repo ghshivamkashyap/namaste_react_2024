@@ -1,10 +1,12 @@
-
-import './App.css';
+import { Route, Routes, useNavigate } from "react-router-dom";
+import Login from "./components/pages/Login";
 
 function App() {
   return (
-    <div className="App">
-     netflix gpt
+    <div className="App m-0 p-0">
+      <Routes>
+        <Route path="/" element={<Login />} />
+      </Routes>
     </div>
   );
 }
