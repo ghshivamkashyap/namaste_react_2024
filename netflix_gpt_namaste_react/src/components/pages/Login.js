@@ -1,4 +1,6 @@
 import React, { useRef, useState } from "react";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const Login = () => {
   const [isSignIn, setIsSignIn] = useState(true);
@@ -8,11 +10,18 @@ const Login = () => {
 
   const handleLogin = (e) => {
     e.preventDefault();
+    // toast.error("Wow so easy!");
+    // toast("Default Notification !");
     console.log("Login called");
 
     const isEmailValid = /^[a-zA-Z0-9_.±]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$/.test(
-      "sk7762415@gmail.co.m"
+      email.current.value
     );
+
+    if (!isEmailValid) {
+      toast.warning("Enter a valid email address and password");
+      return;
+    }
     isEmailValid
       ? console.log("Email is valid")
       : console.log("Email is not valid");
@@ -22,7 +31,6 @@ const Login = () => {
       email.current.value,
       password.current.value,
       confirmPassword?.current?.value
-      
     );
   };
   return (
@@ -32,6 +40,7 @@ const Login = () => {
         backgroundImage: `url('https://res.cloudinary.com/dgdcxdajg/image/upload/v1730048587/netflix_background_zvdmqr.jpg')`,
       }}
     >
+      <ToastContainer />
       <div className="bg-black bg-opacity-65 p-10 rounded-lg w-full max-w-md">
         <h2 className="text-white text-3xl font-bold mb-8 text-center">
           {isSignIn ? <>Sign in</> : <>Sign up</>}
