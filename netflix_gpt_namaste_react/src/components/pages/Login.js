@@ -1,7 +1,10 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 
 const Login = () => {
   const [isSignIn, setIsSignIn] = useState(true);
+  const email = useRef(null);
+  const password = useRef(null);
+  const confirmPassword = useRef(null);
 
   const handleLogin = (e) => {
     e.preventDefault();
@@ -13,6 +16,13 @@ const Login = () => {
     isEmailValid
       ? console.log("Email is valid")
       : console.log("Email is not valid");
+
+    console.log(
+      "rerf data: ",
+      email.current.value,
+      password.current.value,
+      confirmPassword?.current?.value
+    );
   };
   return (
     <div
@@ -25,16 +35,15 @@ const Login = () => {
         <h2 className="text-white text-3xl font-bold mb-8 text-center">
           {isSignIn ? <>Sign in</> : <>Sign up</>}
         </h2>
-        <form
-          onSubmit={handleLogin}
-          className="flex flex-col space-y-4"
-        >
+        <form onSubmit={handleLogin} className="flex flex-col space-y-4">
           <input
+            ref={email}
             type="email"
             placeholder="Email address"
             className="p-3 bg-gray-700 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500"
           />
           <input
+            ref={password}
             type="password"
             placeholder="Password"
             className="p-3 bg-gray-700 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500"
@@ -42,6 +51,7 @@ const Login = () => {
 
           {!isSignIn && (
             <input
+              ref={confirmPassword}
               type="password"
               placeholder="Confirm password"
               className="p-3 bg-gray-700 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500"
