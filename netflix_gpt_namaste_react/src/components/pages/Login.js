@@ -2,6 +2,18 @@ import React, { useState } from "react";
 
 const Login = () => {
   const [isSignIn, setIsSignIn] = useState(true);
+
+  const handleLogin = (e) => {
+    e.preventDefault();
+    console.log("Login called");
+
+    const isEmailValid = /^[a-zA-Z0-9_.±]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$/.test(
+      "sk7762415@gmail.co.m"
+    );
+    isEmailValid
+      ? console.log("Email is valid")
+      : console.log("Email is not valid");
+  };
   return (
     <div
       className="h-screen flex flex-col items-center justify-center bg-cover bg-center bg-no-repeat"
@@ -13,7 +25,10 @@ const Login = () => {
         <h2 className="text-white text-3xl font-bold mb-8 text-center">
           {isSignIn ? <>Sign in</> : <>Sign up</>}
         </h2>
-        <form className="flex flex-col space-y-4">
+        <form
+          onSubmit={handleLogin}
+          className="flex flex-col space-y-4"
+        >
           <input
             type="email"
             placeholder="Email address"
@@ -33,21 +48,12 @@ const Login = () => {
             />
           )}
 
-          {isSignIn ? (
-            <button
-              type="submit"
-              className="bg-red-600 text-white py-3 rounded-lg font-semibold hover:bg-red-700 transition duration-200"
-            >
-              Sign In
-            </button>
-          ) : (
-            <button
-              type="submit"
-              className="bg-red-600 text-white py-3 rounded-lg font-semibold hover:bg-red-700 transition duration-200"
-            >
-              Sign up
-            </button>
-          )}
+          <button
+            type="submit"
+            className="bg-red-600 text-white py-3 rounded-lg font-semibold hover:bg-red-700 transition duration-200"
+          >
+            {isSignIn ? "Sign In" : "Sign Up"}
+          </button>
         </form>
         <div className="flex justify-between items-center mt-4 text-gray-400 text-sm">
           <label className="flex items-center space-x-2">
@@ -58,30 +64,6 @@ const Login = () => {
             Need help?
           </a>
         </div>
-
-        {isSignIn ? (
-          <div className="text-gray-400 mt-8 text-center">
-            New to NetflixGPT?{" "}
-            <a
-              href="#"
-              onClick={() => setIsSignIn(false)}
-              className="text-white hover:underline"
-            >
-              Sign up now
-            </a>
-          </div>
-        ) : (
-          <div className="text-gray-400 mt-8 text-center">
-            Already having an account{" "}
-            <a
-              href="#"
-              onClick={() => setIsSignIn(true)}
-              className="text-white hover:underline"
-            >
-              Sign in now
-            </a>
-          </div>
-        )}
       </div>
     </div>
   );
