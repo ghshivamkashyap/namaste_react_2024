@@ -22,6 +22,7 @@ const Login = () => {
       email.current.value,
       password.current.value,
       confirmPassword?.current?.value
+      
     );
   };
   return (
