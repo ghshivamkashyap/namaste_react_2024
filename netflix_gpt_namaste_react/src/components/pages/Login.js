@@ -21,7 +21,11 @@ const Login = () => {
       email.current.value
     );
 
-    if (!isEmailValid) {
+    if (
+      !isEmailValid ||
+      !password.current.value ||
+      !confirmPassword?.current?.value
+    ) {
       toast.warning("Enter a valid email address and password");
       return;
     }
