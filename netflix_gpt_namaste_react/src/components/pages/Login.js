@@ -3,9 +3,12 @@ import { ToastContainer, toast } from "react-toastify";
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 import "react-toastify/dist/ReactToastify.css";
 import { firebaseAuth } from "../../config/firebase";
+import LoaderSpinner from "../common/LoaderSpinner";
 
 const Login = () => {
   const [isSignIn, setIsSignIn] = useState(true);
+  const [loading, setLoading] = useState(false);
+
   const email = useRef(null);
   const password = useRef(null);
 
@@ -48,37 +51,47 @@ const Login = () => {
 
   const handleSignup = async (e) => {
     e.preventDefault();
-    console.log("Signup called");
-
-    const isEmailValid = /^[a-zA-Z0-9_.±]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/.test(
-      email.current.value
-    );
-
-    if (!isEmailValid) {
-      toast.warning("Enter a valid email address");
-      return;
-    }
-
-    if (password.current.value !== confirmPassword.current.value) {
-      toast.warning("Password and Confirm Password should be the same");
-      return;
-    }
-
-    isEmailValid
-      ? console.log("Email is valid")
-      : console.log("Email is not valid");
-
-    console.log(
-      "ref data: ",
-      email.current.value,
-      password.current.value,
-      confirmPassword?.current?.value
-    );
-
-    // Show loading toast
-    const loadingToastId = toast.loading("Creating user...");
+    let loadingToastId = null;
 
     try {
+      setLoading(true);
+      console.log("Signup called");
+
+      const isEmailValid =
+        /^[a-zA-Z0-9_.±]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/.test(
+          email.current.value
+        );
+
+      if (!isEmailValid) {
+        toast.warning("Enter a valid email address");
+        return;
+      }
+
+      if (
+        !email.current.value ||
+        !password.current.value ||
+        !confirmPassword?.current?.value
+      ) {
+        toast.warn("Enter a valid email address and password", {
+          position: "top-right",
+        });
+        return;
+      }
+
+      if (password.current.value !== confirmPassword.current.value) {
+        toast.warning("Password and Confirm Password should be the same");
+        return;
+      }
+
+      console.log(
+        "ref data: ",
+        email.current.value,
+        password.current.value,
+        confirmPassword?.current?.value
+      );
+
+      // Show loading toast
+      loadingToastId = toast.loading("Creating user...");
       const userCredential = await createUserWithEmailAndPassword(
         firebaseAuth,
         email.current.value,
@@ -87,7 +100,6 @@ const Login = () => {
       const user = userCredential.user;
       console.log("New user: ", user);
 
-      // Update toast with success message
       toast.update(loadingToastId, {
         render: "User created successfully",
         type: "success",
@@ -97,7 +109,6 @@ const Login = () => {
     } catch (error) {
       const errorMessage = error.message;
 
-      // Update toast with error message
       toast.update(loadingToastId, {
         render: errorMessage,
         type: "error",
@@ -106,6 +117,8 @@ const Login = () => {
       });
 
       console.log("Error:", error);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -122,7 +135,9 @@ const Login = () => {
           {isSignIn ? <>Sign in</> : <>Sign up</>}
         </h2>
         <form
-          onSubmit={isSignIn == true ? handleLogin : handleSignup}
+          onSubmit={
+            !loading ? (isSignIn == true ? handleLogin : handleSignup) : null
+          }
           className="flex flex-col space-y-4"
         >
           <input
@@ -151,7 +166,18 @@ const Login = () => {
             type="submit"
             className="bg-red-600 text-white py-3 rounded-lg font-semibold hover:bg-red-700 transition duration-200"
           >
-            {isSignIn ? "Sign In" : "Sign Up"}
+            {loading ? (
+              <div className=" justify-evenly">
+                Loading{" "}
+                <span>
+                  <LoaderSpinner />
+                </span>
+              </div>
+            ) : isSignIn ? (
+              "Sign In"
+            ) : (
+              "Sign Up"
+            )}
           </button>
         </form>
         <div className="flex justify-between items-center mt-4 text-gray-400 text-sm">
