@@ -1,11 +1,14 @@
 import React, { useRef, useState } from "react";
 import { ToastContainer, toast } from "react-toastify";
+import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 import "react-toastify/dist/ReactToastify.css";
+import { firebaseAuth } from "../../config/firebase";
 
 const Login = () => {
   const [isSignIn, setIsSignIn] = useState(true);
   const email = useRef(null);
   const password = useRef(null);
+
   const confirmPassword = useRef(null);
 
   const handleLogin = (e) => {
@@ -22,6 +25,11 @@ const Login = () => {
       toast.warning("Enter a valid email address and password");
       return;
     }
+
+    if (password.current.value !== confirmPassword.current.value) {
+      toast.error("Password and Confirm Password should be same");
+      return;
+    }
     isEmailValid
       ? console.log("Email is valid")
       : console.log("Email is not valid");
@@ -33,6 +41,70 @@ const Login = () => {
       confirmPassword?.current?.value
     );
   };
+
+  const handleSignup = async (e) => {
+    e.preventDefault();
+    console.log("Signup called");
+
+    const isEmailValid = /^[a-zA-Z0-9_.±]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/.test(
+      email.current.value
+    );
+
+    if (!isEmailValid) {
+      toast.warning("Enter a valid email address");
+      return;
+    }
+
+    if (password.current.value !== confirmPassword.current.value) {
+      toast.warning("Password and Confirm Password should be the same");
+      return;
+    }
+
+    isEmailValid
+      ? console.log("Email is valid")
+      : console.log("Email is not valid");
+
+    console.log(
+      "ref data: ",
+      email.current.value,
+      password.current.value,
+      confirmPassword?.current?.value
+    );
+
+    // Show loading toast
+    const loadingToastId = toast.loading("Creating user...");
+
+    try {
+      const userCredential = await createUserWithEmailAndPassword(
+        firebaseAuth,
+        email.current.value,
+        password.current.value
+      );
+      const user = userCredential.user;
+      console.log("New user: ", user);
+
+      // Update toast with success message
+      toast.update(loadingToastId, {
+        render: "User created successfully",
+        type: "success",
+        isLoading: false,
+        autoClose: 3000,
+      });
+    } catch (error) {
+      const errorMessage = error.message;
+
+      // Update toast with error message
+      toast.update(loadingToastId, {
+        render: errorMessage,
+        type: "error",
+        isLoading: false,
+        autoClose: 3000,
+      });
+
+      console.log("Error:", error);
+    }
+  };
+
   return (
     <div
       className="h-screen flex flex-col items-center justify-center bg-cover bg-center bg-no-repeat"
@@ -45,7 +117,10 @@ const Login = () => {
         <h2 className="text-white text-3xl font-bold mb-8 text-center">
           {isSignIn ? <>Sign in</> : <>Sign up</>}
         </h2>
-        <form onSubmit={handleLogin} className="flex flex-col space-y-4">
+        <form
+          onSubmit={isSignIn == true ? handleLogin : handleSignup}
+          className="flex flex-col space-y-4"
+        >
           <input
             ref={email}
             type="email"
@@ -80,8 +155,14 @@ const Login = () => {
             <input type="checkbox" className="form-checkbox bg-gray-700" />
             <span>Remember me</span>
           </label>
-          <a href="#" className="hover:underline">
-            Need help?
+          <a
+            onClick={() => {
+              setIsSignIn(!isSignIn);
+            }}
+            href="#"
+            className="hover:underline"
+          >
+            {isSignIn ? "Sign up" : "Sign in"}
           </a>
         </div>
       </div>
