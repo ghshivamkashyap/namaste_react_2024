@@ -1,9 +1,14 @@
 import React, { useRef, useState } from "react";
 import { ToastContainer, toast } from "react-toastify";
-import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+import {
+  getAuth,
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+} from "firebase/auth";
 import "react-toastify/dist/ReactToastify.css";
 import { firebaseAuth } from "../../config/firebase";
 import LoaderSpinner from "../common/LoaderSpinner";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
   const [isSignIn, setIsSignIn] = useState(true);
@@ -11,42 +16,52 @@ const Login = () => {
 
   const email = useRef(null);
   const password = useRef(null);
+  const navigate = useNavigate();
 
   const confirmPassword = useRef(null);
 
-  const handleLogin = (e) => {
+  const handleLogin = async (e) => {
     e.preventDefault();
-    // toast.error("Wow so easy!");
-    // toast("Default Notification !");
+
     console.log("Login called");
+    const loadingToastId = toast.loading("Logging in...");
+    try {
+      const isEmailValid =
+        /^[a-zA-Z0-9_.±]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$/.test(
+          email.current.value
+        );
 
-    const isEmailValid = /^[a-zA-Z0-9_.±]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$/.test(
-      email.current.value
-    );
+      if (!isEmailValid || !password.current.value) {
+        toast.warning("Enter a valid email address and password");
+        return;
+      }
 
-    if (
-      !isEmailValid ||
-      !password.current.value ||
-      !confirmPassword?.current?.value
-    ) {
-      toast.warning("Enter a valid email address and password");
-      return;
+      const data = await signInWithEmailAndPassword(
+        firebaseAuth,
+        email.current.value,
+        password.current.value
+      );
+      console.log("User data: ", data);
+
+      toast.update(loadingToastId, {
+        render: "Logged in successfully",
+        type: "success",
+        isLoading: false,
+        autoClose: 3000,
+      });
+    } catch (e) {
+      console.log("Login error: ", e);
+      const errorMessage = e.message;
+
+      toast.update(loadingToastId, {
+        render: errorMessage,
+        type: "error",
+        isLoading: false,
+        autoClose: 3000,
+      });
     }
 
-    if (password.current.value !== confirmPassword.current.value) {
-      toast.error("Password and Confirm Password should be same");
-      return;
-    }
-    isEmailValid
-      ? console.log("Email is valid")
-      : console.log("Email is not valid");
-
-    console.log(
-      "rerf data: ",
-      email.current.value,
-      password.current.value,
-      confirmPassword?.current?.value
-    );
+    console.log("rerf data: ", email.current.value, password.current.value);
   };
 
   const handleSignup = async (e) => {
@@ -90,7 +105,6 @@ const Login = () => {
         confirmPassword?.current?.value
       );
 
-      // Show loading toast
       loadingToastId = toast.loading("Creating user...");
       const userCredential = await createUserWithEmailAndPassword(
         firebaseAuth,
@@ -100,12 +114,18 @@ const Login = () => {
       const user = userCredential.user;
       console.log("New user: ", user);
 
+      email.current.value = "";
+      password.current.value = "";
+      confirmPassword.current.value = "";
+
       toast.update(loadingToastId, {
         render: "User created successfully",
         type: "success",
         isLoading: false,
         autoClose: 3000,
       });
+
+      navigate(`/browse/${user.uid}`);
     } catch (error) {
       const errorMessage = error.message;
 

@@ -1,11 +1,12 @@
-import React from 'react'
+import React, { useState } from "react";
+import { useParams } from "react-router-dom";
 
 const Browse = () => {
-  return (
-    <div>
-      browse page
-    </div>
-  )
-}
+  const params = useParams();
+  useState(() => {
+    console.log("Browse page: ", params);
+  }, []);
+  return <div>browse page</div>;
+};
 
-export default Browse
+export default Browse;
