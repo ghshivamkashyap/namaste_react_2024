@@ -41,7 +41,7 @@ const Login = () => {
         email.current.value,
         password.current.value
       );
-      console.log("User data: ", data);
+      console.log("User data login: ", data);
 
       toast.update(loadingToastId, {
         render: "Logged in successfully",
@@ -49,6 +49,8 @@ const Login = () => {
         isLoading: false,
         autoClose: 3000,
       });
+
+      navigate(`/browse/${data.user.uid}`);
     } catch (e) {
       console.log("Login error: ", e);
       const errorMessage = e.message;
