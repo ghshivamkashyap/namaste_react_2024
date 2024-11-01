@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { signOut } from "firebase/auth";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { firebaseAuth } from "../../config/firebase";
 import { setSignOut } from "../../utils/Redux_store/Slices/userSlice";
 import { toast } from "react-toastify";
@@ -35,6 +35,9 @@ const Browse = () => {
       // No need to update the toast again here
     }
   };
+
+  const user = useSelector((store) => store.user);
+  console.log("Store: ", user.user);
 
   return (
     <div className="bg-black min-h-screen text-white p-4">
