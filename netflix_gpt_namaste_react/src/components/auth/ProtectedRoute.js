@@ -1,16 +1,15 @@
-import React, { Children } from "react";
+import React from "react";
 import { useSelector } from "react-redux";
-import Login from "../pages/Login";
 import { Navigate } from "react-router-dom";
 
-const ProtectedRoute = () => {
-  const user = useSelector((store) => store.user);
+const ProtectedRoute = ({ children }) => {
+  const user = useSelector((store) => store.user.user);
 
-  if (user == null) {
-    return <Navigate to={"/"} />;
-  } else {
-    return Children;
+  if (!user) {
+    return <Navigate to="/" replace />;
   }
+
+  return children;
 };
 
 export default ProtectedRoute;

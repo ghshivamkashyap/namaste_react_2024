@@ -26,9 +26,16 @@ function App() {
     <div className="App m-0 p-0">
       <Routes>
         <Route path="/" element={<Login />} />
-        <ProtectedRoute>
-          <Route path="/browse/:id" element={<Browse />} />
-        </ProtectedRoute>
+
+        {/* protected routes  */}
+        <Route
+          path="/browse/:id"
+          element={
+            <ProtectedRoute>
+              <Browse />
+            </ProtectedRoute>
+          }
+        />
       </Routes>
     </div>
   );
