@@ -63,7 +63,7 @@ const Login = () => {
       });
     }
 
-    console.log("rerf data: ", email.current.value, password.current.value);
+    // console.log("rerf data: ", email.current.value, password.current.value);
   };
 
   const handleSignup = async (e) => {

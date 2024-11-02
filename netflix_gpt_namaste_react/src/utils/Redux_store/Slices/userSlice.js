@@ -5,7 +5,7 @@ const userSlice = createSlice({
   initialState: { user: null },
   reducers: {
     setUserLogin: (state, action) => {
-      console.log("User is logged in: ", action.payload);
+      // console.log("User is logged in: ", action.payload);
 
       state.user = action.payload;
     },

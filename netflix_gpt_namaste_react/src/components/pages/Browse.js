@@ -12,7 +12,7 @@ const Browse = () => {
   const { id } = useParams();
 
   useEffect(() => {
-    console.log("Browse page: ", id);
+    // console.log("Browse page: ", id);
   }, [id]);
 
   const handleLogout = async () => {

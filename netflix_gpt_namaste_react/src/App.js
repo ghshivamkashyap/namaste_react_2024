@@ -6,14 +6,15 @@ import { onAuthStateChanged } from "firebase/auth";
 import { firebaseAuth } from "./config/firebase";
 import { useEffect } from "react";
 import { setSignOut, setUserLogin } from "./utils/Redux_store/Slices/userSlice";
+import ProtectedRoute from "./components/auth/ProtectedRoute";
 
 function App() {
   const dispatch = useDispatch();
   useEffect(() => {
     onAuthStateChanged(firebaseAuth, (user) => {
       if (user) {
-        dispatch(setUserLogin({ user }));
-        console.log("User is logged in: ", user);
+        dispatch(setUserLogin({ user: user.uid, email: user.email }));
+        // console.log("User is logged in: ", user);
       } else {
         dispatch(setSignOut());
         console.log("User is logged out");
@@ -25,7 +26,9 @@ function App() {
     <div className="App m-0 p-0">
       <Routes>
         <Route path="/" element={<Login />} />
-        <Route path="/browse/:id" element={<Browse />} />
+        <ProtectedRoute>
+          <Route path="/browse/:id" element={<Browse />} />
+        </ProtectedRoute>
       </Routes>
     </div>
   );
