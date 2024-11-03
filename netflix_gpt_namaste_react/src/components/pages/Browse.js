@@ -49,7 +49,7 @@ const Browse = () => {
       const jsonData = await res.json();
 
       console.log("Res: ", jsonData);
-      dispatch(setMovies(jsonData))
+      dispatch(setMovies(jsonData?.results));
     };
     fetchData();
   }, []);
