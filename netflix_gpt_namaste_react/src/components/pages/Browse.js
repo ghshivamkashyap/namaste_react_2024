@@ -6,13 +6,12 @@ import { firebaseAuth } from "../../config/firebase";
 import { setSignOut } from "../../utils/Redux_store/Slices/userSlice";
 import { toast } from "react-toastify";
 import { setMovies } from "../../utils/Redux_store/Slices/movieSlice";
+import useFetchMoviesData from "../../hooks/useFetchMoviesData";
 
 const Browse = () => {
   const navigate = useNavigate();
-  const dispatch = useDispatch();
-  const { id } = useParams();
 
-  useEffect(() => {}, [id]);
+  const { id } = useParams();
 
   const handleLogout = async () => {
     console.log("Logout called");
@@ -32,27 +31,7 @@ const Browse = () => {
     }
   };
 
-  const url =
-    "https://api.themoviedb.org/3/movie/now_playing?language=en-US&page=1";
-  const options = {
-    method: "GET",
-    headers: {
-      accept: "application/json",
-      Authorization: `Bearer ${process.env.API_ACCESS_TOKEN}`,
-    },
-  };
-
-  useEffect(() => {
-    const fetchData = async () => {
-      const res = await fetch(url, options);
-
-      const jsonData = await res.json();
-
-      console.log("Res: ", jsonData);
-      dispatch(setMovies(jsonData?.results));
-    };
-    fetchData();
-  }, []);
+  useFetchMoviesData();
 
   const user = useSelector((store) => store.user);
   console.log("Store: ", user.user);
