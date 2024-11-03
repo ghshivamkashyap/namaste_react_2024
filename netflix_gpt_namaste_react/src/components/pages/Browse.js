@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { firebaseAuth } from "../../config/firebase";
 import { setSignOut } from "../../utils/Redux_store/Slices/userSlice";
 import { toast } from "react-toastify";
+import { setMovies } from "../../utils/Redux_store/Slices/movieSlice";
 
 const Browse = () => {
   const navigate = useNavigate();
@@ -48,6 +49,7 @@ const Browse = () => {
       const jsonData = await res.json();
 
       console.log("Res: ", jsonData);
+      dispatch(setMovies(jsonData))
     };
     fetchData();
   }, []);
