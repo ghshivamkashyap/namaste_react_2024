@@ -11,9 +11,7 @@ const Browse = () => {
   const dispatch = useDispatch();
   const { id } = useParams();
 
-  useEffect(() => {
-    // console.log("Browse page: ", id);
-  }, [id]);
+  useEffect(() => {}, [id]);
 
   const handleLogout = async () => {
     console.log("Logout called");
@@ -22,19 +20,37 @@ const Browse = () => {
       await signOut(firebaseAuth);
       console.log("User logged out successfully");
 
-      // Update loading toast to success message
       toast.success("Logegd out...");
 
       navigate("/");
     } catch (error) {
-      // Update loading toast to error message
       toast.error("Error logging out...");
       console.error("Logout error:", error.message);
     } finally {
       console.log("Finally block executed");
-      // No need to update the toast again here
     }
   };
+
+  const url =
+    "https://api.themoviedb.org/3/movie/now_playing?language=en-US&page=1";
+  const options = {
+    method: "GET",
+    headers: {
+      accept: "application/json",
+      Authorization: `Bearer ${process.env.API_ACCESS_TOKEN}`,
+    },
+  };
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const res = await fetch(url, options);
+
+      const jsonData = await res.json();
+
+      console.log("Res: ", jsonData);
+    };
+    fetchData();
+  }, []);
 
   const user = useSelector((store) => store.user);
   console.log("Store: ", user.user);

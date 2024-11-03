@@ -7,6 +7,7 @@ import { firebaseAuth } from "./config/firebase";
 import { useEffect } from "react";
 import { setSignOut, setUserLogin } from "./utils/Redux_store/Slices/userSlice";
 import ProtectedRoute from "./components/auth/ProtectedRoute";
+import OpenRoute from "./components/auth/OpenRoute";
 
 function App() {
   const dispatch = useDispatch();
@@ -25,7 +26,14 @@ function App() {
   return (
     <div className="App m-0 p-0">
       <Routes>
-        <Route path="/" element={<Login />} />
+        <Route
+          path="/"
+          element={
+            <OpenRoute>
+              <Login />
+            </OpenRoute>
+          }
+        ></Route>
 
         {/* protected routes  */}
         <Route
