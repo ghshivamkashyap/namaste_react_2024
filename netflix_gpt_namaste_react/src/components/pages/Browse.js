@@ -6,14 +6,13 @@ import { firebaseAuth } from "../../config/firebase";
 import { setSignOut } from "../../utils/Redux_store/Slices/userSlice";
 import { toast } from "react-toastify";
 import { setMovies } from "../../utils/Redux_store/Slices/movieSlice";
+import useFetchMoviesData from "../../hooks/useFetchMoviesData";
 import VideoContainer from "../browse/VideoContainer";
 
 const Browse = () => {
   const navigate = useNavigate();
-  const dispatch = useDispatch();
-  const { id } = useParams();
 
-  useEffect(() => {}, [id]);
+  const { id } = useParams();
 
   const handleLogout = async () => {
     console.log("Logout called");
@@ -39,8 +38,7 @@ const Browse = () => {
     method: "GET",
     headers: {
       accept: "application/json",
-      // Authorization: `Bearer ${process.env.API_ACCESS_TOKEN}`,
-      Authorization: `Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI0MTQ3NzYzZmY5ODExNmI2MmMwODM2YThmNTEwOGYxMyIsIm5iZiI6MTczMDU0MTk1NS41ODE1MzQsInN1YiI6IjY3MjVlYTU4MGQ5MjNkOTkzNTlmOGJiZCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.Tya6pEJ9KLAsR6ygn61rPCbTBXUmiCTR1soeQxTdpdc`,
+      Authorization: `Bearer ${process.env.API_ACCESS_TOKEN}`,
     },
   };
 
@@ -50,7 +48,7 @@ const Browse = () => {
 
       const jsonData = await res.json();
 
-      // console.log("Res: ", jsonData);
+      console.log("Res: ", jsonData);
       dispatch(setMovies(jsonData?.results));
     };
     fetchData();
