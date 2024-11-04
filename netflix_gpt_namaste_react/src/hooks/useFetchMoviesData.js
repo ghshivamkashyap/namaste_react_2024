@@ -12,7 +12,9 @@ const useFetchMoviesData = () => {
     method: "GET",
     headers: {
       accept: "application/json",
-      Authorization: `Bearer ${process.env.API_ACCESS_TOKEN}`,
+      // Authorization: `Bearer ${process.env.API_ACCESS_TOKEN}`,
+      Authorization: `Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI0MTQ3NzYzZmY5ODExNmI2MmMwODM2YThmNTEwOGYxMyIsIm5iZiI6MTczMDY0MzEyMy45NDAyNjExLCJzdWIiOiI2NzI1ZWE1ODBkOTIzZDk5MzU5ZjhiYmQiLCJzY29wZXMiOlsiYXBpX3JlYWQiXSwidmVyc2lvbiI6MX0.is5405FugDrfL3KrrDyNksaxgROlxjWGYBGCzrBh18E`,
+
     },
   };
 

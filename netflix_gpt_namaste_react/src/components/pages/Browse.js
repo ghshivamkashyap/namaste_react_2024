@@ -14,63 +14,14 @@ const Browse = () => {
 
   const { id } = useParams();
 
-  const handleLogout = async () => {
-    console.log("Logout called");
-
-    try {
-      await signOut(firebaseAuth);
-      console.log("User logged out successfully");
-
-      toast.success("Logegd out...");
-
-      navigate("/");
-    } catch (error) {
-      toast.error("Error logging out...");
-      console.error("Logout error:", error.message);
-    } finally {
-      console.log("Finally block executed");
-    }
-  };
-
-  const url =
-    "https://api.themoviedb.org/3/movie/now_playing?language=en-US&page=1";
-  const options = {
-    method: "GET",
-    headers: {
-      accept: "application/json",
-      Authorization: `Bearer ${process.env.API_ACCESS_TOKEN}`,
-    },
-  };
-
-  useEffect(() => {
-    const fetchData = async () => {
-      const res = await fetch(url, options);
-
-      const jsonData = await res.json();
-
-      console.log("Res: ", jsonData);
-      dispatch(setMovies(jsonData?.results));
-    };
-    fetchData();
-  }, []);
-
+  useFetchMoviesData();
   const user = useSelector((store) => store.user);
   console.log("Store: ", user.user);
 
   return (
     <div className="bg-black m-0 min-h-screen text-white p">
-      {/* Header */}
-      {/* <header className="flex justify-between items-center p-4">
-        <h1 className="text-3xl font-bold">Browse</h1>
-        <button
-          onClick={handleLogout}
-          className="bg-red-600 px-4 py-2 rounded-md"
-        >
-          Logout
-        </button>
-      </header> */}
-
       {/* video background container with name  */}
+
       <VideoContainer />
 
       {/* Category Section */}

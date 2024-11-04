@@ -8,8 +8,11 @@ import { toast } from "react-toastify";
 const VideoContainer = () => {
   const navigate = useNavigate();
   const movieData = useSelector((store) => store?.movie?.movies);
+  const singleMovie = movieData[0];
+  console.log("singleMovie: ", singleMovie);
+
   if (!movieData) return null;
-  console.log("movieData: ", movieData);
+  // console.log("movieData: ", movieData);
 
   const handleLogout = async () => {
     console.log("Logout called");
@@ -39,7 +42,7 @@ const VideoContainer = () => {
         className="absolute top-0 left-0 w-full h-full object-cover"
       >
         <source
-          src="https://res.cloudinary.com/dgdcxdajg/video/upload/v1730733924/NetflixGPT/wijmkmuxpcyy8kdqkw2j.mp4" // Replace with your video path
+          src="https://res.cloudinary.com/dgdcxdajg/video/upload/v1730733924/NetflixGPT/wijmkmuxpcyy8kdqkw2j.mp4"
           type="video/mp4"
         />
         Your browser does not support the video tag.
@@ -59,11 +62,11 @@ const VideoContainer = () => {
       {/* Main Content */}
       <div className="absolute w-full h-full flex flex-col justify-end items-start pb-10 pl-10 bg-black bg-opacity-50 text-white z-10">
         <h1 className="text-4xl md:text-6xl font-bold mb-4">
-          {movieData?.title || "Movie Title"}
+          {singleMovie?.original_title || "Movie Title"}
         </h1>
         <p className="text-lg md:text-2xl mb-6 max-w-lg">
-          {movieData?.description ||
-            "A brief description of the movie goes here."}
+          {singleMovie?.overview.substring(0, 104) ||
+            "A brief description of the movie."}
         </p>
         <div className="flex space-x-4">
           <button className="px-6 py-3 bg-red-600 rounded-md font-semibold hover:bg-red-700">
