@@ -7,6 +7,7 @@ import { setSignOut } from "../../utils/Redux_store/Slices/userSlice";
 import { toast } from "react-toastify";
 import { setMovies } from "../../utils/Redux_store/Slices/movieSlice";
 import useFetchMoviesData from "../../hooks/useFetchMoviesData";
+import VideoContainer from "../browse/VideoContainer";
 
 const Browse = () => {
   const navigate = useNavigate();
@@ -31,16 +32,35 @@ const Browse = () => {
     }
   };
 
-  // custom hook get movies data
-  useFetchMoviesData();
+  const url =
+    "https://api.themoviedb.org/3/movie/now_playing?language=en-US&page=1";
+  const options = {
+    method: "GET",
+    headers: {
+      accept: "application/json",
+      Authorization: `Bearer ${process.env.API_ACCESS_TOKEN}`,
+    },
+  };
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const res = await fetch(url, options);
+
+      const jsonData = await res.json();
+
+      console.log("Res: ", jsonData);
+      dispatch(setMovies(jsonData?.results));
+    };
+    fetchData();
+  }, []);
 
   const user = useSelector((store) => store.user);
   console.log("Store: ", user.user);
 
   return (
-    <div className="bg-black min-h-screen text-white p-4">
+    <div className="bg-black m-0 min-h-screen text-white p">
       {/* Header */}
-      <header className="flex justify-between items-center py-4">
+      {/* <header className="flex justify-between items-center p-4">
         <h1 className="text-3xl font-bold">Browse</h1>
         <button
           onClick={handleLogout}
@@ -48,10 +68,13 @@ const Browse = () => {
         >
           Logout
         </button>
-      </header>
+      </header> */}
+
+      {/* video background container with name  */}
+      <VideoContainer />
 
       {/* Category Section */}
-      <section className="mt-6">
+      <section className="mt-6 p-4">
         <h2 className="text-2xl font-semibold mb-4">Popular on Netflix</h2>
         <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4">
           {/* Dummy thumbnail items */}
@@ -74,7 +97,7 @@ const Browse = () => {
       </section>
 
       {/* Additional Rows */}
-      <section className="mt-10">
+      <section className="mt-10 p-4">
         <h2 className="text-2xl font-semibold mb-4">Trending Now</h2>
         <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4">
           {[...Array(12)].map((_, index) => (
