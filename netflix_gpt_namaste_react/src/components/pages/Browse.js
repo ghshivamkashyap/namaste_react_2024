@@ -31,6 +31,7 @@ const Browse = () => {
     }
   };
 
+  // custom hook get movies data
   useFetchMoviesData();
 
   const user = useSelector((store) => store.user);
