@@ -8,10 +8,10 @@ import { toast } from "react-toastify";
 const VideoContainer = () => {
   const navigate = useNavigate();
   const movieData = useSelector((store) => store?.movie?.movies);
-  const singleMovie = movieData[0];
-  console.log("singleMovie: ", singleMovie);
 
   if (!movieData) return null;
+  const singleMovie = movieData[0];
+  console.log("singleMovie: ", singleMovie);
   // console.log("movieData: ", movieData);
 
   const handleLogout = async () => {
