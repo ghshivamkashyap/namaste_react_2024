@@ -5,9 +5,9 @@ import { useNavigate } from "react-router-dom";
 import { signOut } from "firebase/auth";
 import { toast } from "react-toastify";
 
-const VideoContainer = () => {
- 
-  
+const VideoContainer = ({ handleGPTButtonClick }) => {
+  console.log("handleGPTButtonClick: ", handleGPTButtonClick);
+
   const navigate = useNavigate();
   const movieData = useSelector((store) => store?.movie?.movies);
 
@@ -53,12 +53,20 @@ const VideoContainer = () => {
       {/* Header with Logout Button */}
       <div className="absolute top-0 w-full flex justify-between items-center px-10 py-5 bg-opacity-50 text-white z-20">
         <h1 className="text-3xl font-bold">NetflixGPT</h1>
-        <button
-          onClick={handleLogout}
-          className="bg-red-600 px-4 py-2 hover:bg-red-500 cursor-pointer rounded-md"
-        >
-          Logout
-        </button>
+        <div className=" gap-x-2 flex">
+          <button
+            onClick={handleGPTButtonClick}
+            className="bg-purple-600 px-4 py-2 hover:bg-purple-500 cursor-pointer rounded-md"
+          >
+            GPT Search
+          </button>
+          <button
+            onClick={handleLogout}
+            className="bg-red-600 px-4 py-2 hover:bg-red-500 cursor-pointer rounded-md"
+          >
+            Logout
+          </button>
+        </div>
       </div>
 
       {/* Main Content */}
